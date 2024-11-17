@@ -116,9 +116,8 @@ if st.button("Process"):
                 output_tokens = completion.usage.completion_tokens
                 total_tokens = completion.usage.total_tokens
                 st.json(response)  # Display JSON response
-                st.write(f"""
-                        Input Tokens: {prompt_tokens}
-                        Output Tokens: {output_tokens}
-                        Total Tokens: {total_tokens}""")
+                st.write(f"Input Tokens: {prompt_tokens}")
+                st.write(f"Output Tokens: {output_tokens}")
+                st.write(f"Total Tokens: {total_tokens}")
             except Exception as e:
                 st.error(f"Error during OpenAI processing: {e}")
