@@ -67,27 +67,41 @@ template = """'''
 }
 '''"""
 
-# Prompts for OpenAI
-SYSTEM_PROMPT = """You are a smart assistant that reads the provided data smartly and extracts the mentioned key values. Strictly follow the user's instructions."""
+# Prompts
+SYSTEM_PROMPT = """You are a smart assistant that extracts the requested information accurately."""
+
 USER_PROMPT_TEMPLATE = """
-Here is the raw data to process and extract key values smartly:
-{data}
-Now your task is:
-1- extract the following information from the data:
-Highest_Qualification_Held, Experience_in_Years, Current_Job_Title, Current_Employer, Skill_Set.
-2- extract the experience and its details like:
-company, currently work at that company or not, summary of that experience, work duration, period (from & to), and then occupation title.
-3- extract educational details like:
-institute or school, currently pursuing or not, degree name, and duration (from & to).
-After the data extraction, structure the data like the JSON template below.
+Process the raw data below and extract the following details:
+1. General Info:
+   - Highest Qualification Held
+   - Experience in Years
+   - Current Job Title
+   - Current Employer
+   - Skill Set
+2. Experience Details:
+   - Company
+   - Currently working there (True/False)
+   - Summary
+   - Work Duration (from/to)
+   - Occupation Title
+3. Educational Details:
+   - Institute/School
+   - Currently pursuing (True/False)
+   - Degree
+   - Duration (from/to)
+
+Format the output as a JSON object matching this template:
 {template}
 
-Note:
-1- Use NILL for missing values. If "from" or "to" dates are missing, use the current date.
-2- If you found two or more sets of any value, append them accordingly.
+Notes:
+1. Use NILL for missing values. If "from" or "to" dates are missing, use the current date.
+2. If multiple entries exist, append each separately.
+3. Strictly follow the given instructions and JSON format.
 
-Output **only** a valid JSON object. Do not include any extra text, comments, or explanations from your side.
+Raw Data:
+{data}
 """
+
 
 # Process button
 if st.button("Process"):
